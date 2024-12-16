@@ -1,0 +1,141 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title class="ion-text-center">Viajes Disponibles</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding theme-toggle">
+  <ion-grid>
+    <ion-row>
+      <ion-col size-lg="4" size-md="6" size-sm="12" *ngFor="let viaje of viajes">
+        <ion-card class="viaje-card">
+          <ion-card-header>
+            <ion-card-title>
+              {{ viaje?.destino }}
+            </ion-card-title>
+            <ion-card-subtitle>
+              {{ viaje?.horaSalida | date: 'EEEE, dd MMMM' }}
+            </ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            <div class="info-row">
+              <ion-icon name="time-outline"></ion-icon>
+              {{ viaje?.horaSalida | date: 'HH:mm' }}
+            </div>
+            <div class="info-row">
+              <ion-icon name="people-outline"></ion-icon>
+              {{ viaje?.asientos }} asientos
+            </div>
+            <div class="info-row">
+              <ion-icon name="cash-outline"></ion-icon>
+              {{ viaje?.costo | currency }}
+            </div>
+          </ion-card-content>
+
+          <div class="card-actions">
+            <ion-button expand="block" color="primary" (click)="verViaje(viaje?.id)">
+              Confirmar
+            </ion-button>
+            <ion-button expand="block" fill="outline" class="chat-button" (click)="irAlChat(viaje?.id)">
+              Chat
+            </ion-button>
+          </div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<style>
+/* General */
+.theme-toggle {
+  --ion-background-color: var(--ion-color-light, #ffffff);
+  --ion-background-color-dark: var(--ion-color-dark, #121212);
+  --ion-text-color: var(--ion-color-dark, #121212);
+  --ion-text-color-dark: var(--ion-color-light, #ffffff);
+}
+
+/* Tarjetas */
+.viaje-card {
+  background-color: var(--ion-background-color);
+  color: var(--ion-text-color);
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.viaje-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Cabecera de tarjeta */
+ion-card-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 8px;
+}
+
+ion-card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+ion-card-subtitle {
+  font-size: 0.9rem;
+  color: var(--ion-text-color, rgba(0, 0, 0, 0.6));
+}
+
+/* Contenido */
+.info-row {
+  display: flex;
+  align-items: center;
+  margin: 8px 0;
+  font-size: 0.95rem;
+}
+
+.info-row ion-icon {
+  margin-right: 8px;
+  font-size: 1rem;
+  color: var(--ion-color-primary);
+}
+
+/* Botones */
+.card-actions ion-button {
+  margin-top: 8px;
+}
+
+ion-button {
+  --border-radius: 12px;
+}
+
+.chat-button {
+  --background: transparent;
+  --ion-text-color: var(--ion-color-primary);
+  border: 1px solid var(--ion-color-primary);
+}
+
+.chat-button:hover {
+  --background: var(--ion-color-primary);
+  --ion-text-color: var(--ion-color-light);
+}
+
+/* Responsividad */
+@media screen and (max-width: 768px) {
+  .viaje-card {
+    margin-bottom: 16px;
+  }
+
+  ion-card-title {
+    font-size: 1rem;
+  }
+
+  ion-card-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .info-row {
+    font-size: 0.85rem;
+  }
+}
+</style>
