@@ -162,6 +162,10 @@ export class MapPage implements OnInit {
     }
   }
 
+  
+  
+  
+  
   updateMarkers() {
     if (this.viaje) {
       this.directions.setOrigin([this.viaje.ubicacionActual.lng, this.viaje.ubicacionActual.lat]);
